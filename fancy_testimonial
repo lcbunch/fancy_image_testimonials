@@ -1,0 +1,130 @@
+//Assign color shifting backgrounds to images that remove on click and are added again once another image is clicked, and also show or hide corresponding text
+
+
+///HTML////
+
+<div class="testimonials col-xs-12">
+  <div class="photos col-xs-3">
+      <div id="quote1"><div id="random-color1"class="shifting"><img class="test-img solid" src="_/images/thumb_image_1.jpg" ></div></div>
+      <div id="quote2"><div id="random-color2" class="shifting"><img class="test-img" src="_/images/thumb_image_2.jpg" ></div></div>
+      <div id="quote3"><div id="random-color3" class="shifting"><img class="test-img" src="_/images/thumb_image_3.jpg" ></div></div>
+      <div id="quote4"><div id="random-color4" class="shifting"><img class="test-img" src="_/images/thumb_image_4.jpg" ></div></div>
+  </div>
+  <div class="quotes col-xs-9">
+    <h3 class="ruled-title">{{ 'TESTIMONIAL_TITLE' | translate }}</h3>
+      <span class="quote1 quote invis show">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="floater">~Jane Doe</p>
+      </span>
+      <span class="quote2 quote invis">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="floater">~Jane Doe</p>
+      </span>
+      <span class="quote3 quote invis">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="floater">~Jane Doe</p>
+      </span>
+      <span class="quote4 quote invis">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="floater">~Jane Doe</p>
+      </span>
+  </div>
+</div>
+////CSS////
+
+// Background Color Shift
+@keyframes shiftbackground {
+  0%, 100% { background-color: $blue; } //blue
+  16.6%, 83.2% { background-color: $purple; }//purple
+  33.3%, 66.6% { background-color: $red; }//red
+  50% { background-color: $orange; }//orange
+}
+
+.shifting{
+  height: 160px;
+}
+.random-color1{
+-webkit-animation: shiftbackground 35s ease infinite;
+animation: shiftbackground 35s ease infinite;
+}
+.random-color2{
+  -webkit-animation: shiftbackground 40s reverse infinite;
+  animation: shiftbackground 40s reverse infinite;
+}
+.random-color3{
+  -webkit-animation: shiftbackground 35s linear infinite;
+  animation: shiftbackground 35s linear infinite;
+}
+.random-color4{
+  -webkit-animation: shiftbackground 40s reverse infinite;
+  animation: shiftbackground 40s reverse infinite;
+}
+
+////JavaScript/////
+
+    // set classes
+  var classes = new Array ('random-color1', 'random-color2', 'random-color3', 'random-color4');
+  // calculate length once, as this will never change
+  var length = classes.length;
+  // select all a-tags
+  var shifting = $('.shifting');
+  // loop through all a-tags and apply color randomly
+  var solid = $('.test-img');
+
+  $.each( shifting, function(key, value) {
+      // get random value/class-name from array and add it using the addClass function
+      $(value).addClass( classes[ Math.floor ( Math.random() * length ) ] );
+  });
+// Testimonial switching functions
+  $('.testimonials #quote1').on('click', function () {
+        if (!shifting.hasClass('random-color1 random-color2 random-color3 random-color4')){
+          $.each( shifting, function(key, value) {
+              // get random value/class-name from array and add it using the addClass function
+              $(value).addClass( classes[ Math.floor ( Math.random() * length ) ] );
+          });
+          solid.removeClass('solid');
+        }
+         $('.quote').removeClass('show');
+         $('.quote1').addClass('show');
+         $('#random-color1').removeClass('random-color1 random-color2 random-color3 random-color4');
+         $('#random-color1 .test-img').addClass('solid');
+     });
+ $('.testimonials #quote2').on('click', function () {
+       if (!shifting.hasClass('random-color1 random-color2 random-color3 random-color4')){
+         $.each( shifting, function(key, value) {
+             // get random value/class-name from array and add it using the addClass function
+             $(value).addClass( classes[ Math.floor ( Math.random() * length ) ] );
+         });
+         solid.removeClass('solid');
+       }
+        $('.quote').removeClass('show');
+        $('.quote2').addClass('show');
+        $('#random-color2').removeClass('random-color1 random-color2 random-color3 random-color4');
+        $('#random-color2 .test-img').addClass('solid');
+    });
+  $('.testimonials #quote3').on('click', function () {
+        if (!shifting.hasClass('random-color1 random-color2 random-color3 random-color4')){
+          $.each( shifting, function(key, value) {
+              // get random value/class-name from array and add it using the addClass function
+              $(value).addClass( classes[ Math.floor ( Math.random() * length ) ] );
+          });
+          solid.removeClass('solid');
+        }
+         $('.quote').removeClass('show');
+         $('.quote3').addClass('show');
+         $('#random-color3').removeClass('random-color1 random-color2 random-color3 random-color4');
+         $('#random-color3 .test-img').addClass('solid');
+     });
+   $('.testimonials #quote4').on('click', function () {
+           if (!shifting.hasClass('random-color1 random-color2 random-color3 random-color4')){
+             $.each( shifting, function(key, value) {
+                 // get random value/class-name from array and add it using the addClass function
+                 $(value).addClass( classes[ Math.floor ( Math.random() * length ) ] );
+             });
+             solid.removeClass('solid');
+           }
+          $('.quote').removeClass('show');
+          $('.quote4').addClass('show');
+          $('#random-color4').removeClass('random-color1 random-color2 random-color3 random-color4');
+          $('#random-color4 .test-img').addClass('solid');
+      });
